@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StackedAreaChart.MainPage"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:local="clr-namespace:StackedAreaChart"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+
+    <Border StrokeShape="RoundRectangle 20" 
+              StrokeThickness="2"
+              Stroke="Gray"
+              Margin="{OnPlatform WinUI='20, 0, 20, 20', Android='10', iOS='10', MacCatalyst='30'}">
+        <Grid ColumnDefinitions="5*, 3*" RowDefinitions="50, *">
+
+            <chart:SfCartesianChart TrackballCreated="chart_TrackballCreated" x:Name="chart" Margin="{OnPlatform Default='10, 0, 0, 5', iOS='-65, 0, 0, 5'}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+
+
+
+                <chart:SfCartesianChart.Resources>
+                    <local:TrackballLabelConverter x:Key="labelConverter"/>
+                    <local:TrackballColorConverter x:Key="colorConverter"/>
+                    <DoubleCollection x:Key="gridLine">
+                        <x:Double>3</x:Double>
+                        <x:Double>3</x:Double>
+                    </DoubleCollection>
+
+                    <DataTemplate x:Key="trackballLabelTemplate">
+                        <Border Stroke="Black" Background="LightYellow" StrokeThickness="2" StrokeShape="RoundRectangle 20" Padding="10">
+                            <Grid ColumnSpacing="5" RowSpacing="5" RowDefinitions="Auto, Auto, Auto, Auto ,Auto, Auto, Auto, 1, Auto">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{OnPlatform Android='8', iOS='8', Default='15'}"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <BoxView Grid.Row="0" Grid.Column="0" WidthRequest="{OnPlatform Android=8, iOS=8, Default=10}" HeightRequest="{OnPlatform Android=8, iOS=8, Default=10}" Opacity="{Binding Source={x:Reference series1}, Path=Opacity}"
+                 BackgroundColor="{Binding ., Converter={StaticResource colorConverter}, ConverterParameter=0}" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="Export to Oceania" TextColor="Black" Opacity="{Binding Source={x:Reference series1}, Path=Opacity}" FontSize="{OnPlatform Android=12, iOS=12}"/>
+                                <Label Grid.Row="0" Grid.Column="2" Text="{Binding ., Converter={StaticResource labelConverter}, ConverterParameter=0}" TextColor="Black" FontSize="{OnPlatform Android=12, iOS=12}" Opacity="{Binding Source={x:Reference series1}, Path=Opacity}"/>
+
+                                <BoxView Grid.Row="1" Grid.Column="0" WidthRequest="{OnPlatform Android=8, iOS=8, Default=10}" HeightRequest="{OnPlatform Android=8, iOS=8, Default=10}" Opacity="{Binding Source={x:Reference series2}, Path=Opacity}"
+                 BackgroundColor="{Binding ., Converter={StaticResource colorConverter}, ConverterParameter=1}" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="Export to Eastern Europe" TextColor="Black" Opacity="{Binding Source={x:Reference series2}, Path=Opacity}" FontSize="{OnPlatform Android=12, iOS=12}"/>
+                                <Label Grid.Row="1" Grid.Column="2" Text="{Binding ., Converter={StaticResource labelConverter}, ConverterParameter=1}" TextColor="Black" FontSize="{OnPlatform Android=12, iOS=12}" Opacity="{Binding Source={x:Reference series2}, Path=Opacity}"/>
+
+                                <BoxView Grid.Row="2" Grid.Column="0" WidthRequest="{OnPlatform Android=8, iOS=8, Default=10}" HeightRequest="{OnPlatform Android=8, Default=10}" Opacity="{Binding Source={x:Reference series3}, Path=Opacity}"
+                 BackgroundColor="{Binding ., Converter={StaticResource colorConverter}, ConverterParameter=2}" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="Export to Africa" TextColor="Black" Opacity="{Binding Source={x:Reference series3}, Path=Opacity}" FontSize="{OnPlatform Android=12, iOS=12}"/>
+                                <Label Grid.Row="2" Grid.Column="2" Text="{Binding ., Converter={StaticResource labelConverter}, ConverterParameter=2}" TextColor="Black" FontSize="{OnPlatform Android=12, iOS=12}" Opacity="{Binding Source={x:Reference series3}, Path=Opacity}"/>
+
+                                <BoxView Grid.Row="3" Grid.Column="0" WidthRequest="{OnPlatform Android=8, iOS=8, Default=10}" HeightRequest="{OnPlatform Android=8, Default=10, iOS=8}"
+                 BackgroundColor="{Binding ., Converter={StaticResource colorConverter}, ConverterParameter=3}" Opacity="{Binding Source={x:Reference series4}, Path=Opacity}" />
+                                <Label Grid.Row="3" Grid.Column="1" Text="Export to South America" TextColor="Black" Opacity="{Binding Source={x:Reference series4}, Path=Opacity}" FontSize="{OnPlatform Android=12, iOS=12}"/>
+                                <Label Grid.Row="3" Grid.Column="2" Text="{Binding ., Converter={StaticResource labelConverter}, ConverterParameter=3}" TextColor="Black" FontSize="{OnPlatform Android=12, iOS=12}" Opacity="{Binding Source={x:Reference series4}, Path=Opacity}"/>
+
+                                <BoxView Grid.Row="4" Grid.Column="0" WidthRequest="{OnPlatform Android=8, iOS=8, Default=10}" HeightRequest="{OnPlatform Android=8, Default=10}"
+                 BackgroundColor="{Binding ., Converter={StaticResource colorConverter}, ConverterParameter=4}" Opacity="{Binding Source={x:Reference series5}, Path=Opacity}"/>
+                                <Label Grid.Row="4" Grid.Column="1" Text="Export to North America" TextColor="Black" Opacity="{Binding Source={x:Reference series5}, Path=Opacity}" FontSize="{OnPlatform Android=12, iOS=12}"/>
+                                <Label Grid.Row="4" Grid.Column="2" Text="{Binding ., Converter={StaticResource labelConverter}, ConverterParameter=4}" TextColor="Black" FontSize="{OnPlatform Android=12, iOS=12}" Opacity="{Binding Source={x:Reference series5}, Path=Opacity}"/>
+
+                                <BoxView Grid.Row="5" Grid.Column="0" WidthRequest="{OnPlatform Android=8, iOS=8, Default=10}" HeightRequest="{OnPlatform Android=8, Default=10}"
+                 BackgroundColor="{Binding ., Converter={StaticResource colorConverter}, ConverterParameter=5}" Opacity="{Binding Source={x:Reference series6}, Path=Opacity}"/>
+                                <Label Grid.Row="5" Grid.Column="1" Text="Export to Western Europe" TextColor="Black" Opacity="{Binding Source={x:Reference series6}, Path=Opacity}" FontSize="{OnPlatform Android=12, iOS=12}"/>
+                                <Label Grid.Row="5" Grid.Column="2" Text="{Binding ., Converter={StaticResource labelConverter}, ConverterParameter=5}" TextColor="Black" FontSize="{OnPlatform Android=12, iOS=12}" Opacity="{Binding Source={x:Reference series6}, Path=Opacity}"/>
+
+                                <BoxView Grid.Row="6" Grid.Column="0" WidthRequest="{OnPlatform Android=8, iOS=8, Default=10}" HeightRequest="{OnPlatform Android=8, Default=10}"
+                 BackgroundColor="{Binding ., Converter={StaticResource colorConverter}, ConverterParameter=6}" Opacity="{Binding Source={x:Reference series7}, Path=Opacity}"/>
+                                <Label Grid.Row="6" Grid.Column="1" Text="Export to Asia" TextColor="Black" Opacity="{Binding Source={x:Reference series7}, Path=Opacity}" FontSize="{OnPlatform Android=12, iOS=12}"/>
+                                <Label Grid.Row="6" Grid.Column="2" Text="{Binding ., Converter={StaticResource labelConverter}, ConverterParameter=6}" TextColor="Black" FontSize="{OnPlatform Android=12, iOS=12}" Opacity="{Binding Source={x:Reference series7}, Path=Opacity}"/>
+
+                                <BoxView Grid.Row="7" Grid.ColumnSpan="3" HeightRequest="1" BackgroundColor="LightGray"/>
+
+                                <Label Grid.Row="8" Grid.Column="1" Text="Total" FontAttributes="Bold" FontSize="{OnPlatform Android=12, iOS=12}"/>
+                                <Label Grid.Row="8" Grid.Column="2" FontSize="{OnPlatform Android=12, iOS=12}" Text="{Binding ., Converter={StaticResource labelConverter}, ConverterParameter=7}" FontAttributes="Bold"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+
+                    <DataTemplate x:Key="axisLabelTemplate">
+                        <Label HorizontalTextAlignment="Center" BackgroundColor="LightYellow" Text="{Binding }" TextColor="Black" FontSize ="{OnPlatform Android=12, iOS=12}"/>
+                    </DataTemplate>
+
+                </chart:SfCartesianChart.Resources>
+
+                <chart:SfCartesianChart.Title>
+
+                    <Grid Margin="{OnPlatform Default='0, 10, 0, 10', iOS='-10, 10, 0, 10'}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="{OnPlatform Android=49*,WinUI=59*,MacCatalyst=59*,iOS=49*}"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="export.png" WidthRequest="{OnPlatform WinUI='40', Android='25', iOS=25, MacCatalyst='50'}" 
+                        Margin="25, 0, 0, 0" HeightRequest="{OnPlatform WinUI='40', Android='25', iOS=25, MacCatalyst='50'}" 
+                        Grid.Column="0" Grid.RowSpan="2"/>
+                        <VerticalStackLayout Grid.Column="1" Margin="20, 0, 0, 0">
+                            <Label Text="{Binding TitleText}" 
+                            FontSize="{OnPlatform Default='20', Android='15', iOS='18'}" 
+                            Padding="{OnPlatform Default='0,0,5,2', Android='0,0,5,0', iOS='0,0,5,0'}" 
+                            HorizontalTextAlignment="Start"/>
+                            <Label Text="{Binding SubTitleText}" IsVisible="{OnPlatform Android=False, iOS=False}" 
+                            HorizontalTextAlignment="Start" FontSize="{OnPlatform Android=8,WinUI=12,MacCatalyst=16,iOS=13}" 
+                            TextColor="Grey" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                </chart:SfCartesianChart.Title>
+
+                <chart:SfCartesianChart.XAxes>
+
+                    <chart:NumericalAxis TrackballLabelTemplate="{StaticResource axisLabelTemplate}" ShowMajorGridLines="False" EdgeLabelsVisibilityMode="AlwaysVisible" EdgeLabelsDrawingMode="Center" PlotOffsetEnd="15" ShowTrackballLabel="True">
+                    </chart:NumericalAxis>
+
+                </chart:SfCartesianChart.XAxes>
+
+                <chart:SfCartesianChart.YAxes>
+
+                    <chart:NumericalAxis>
+                        <chart:NumericalAxis.LabelStyle>
+                            <chart:ChartAxisLabelStyle LabelFormat="0'%"/>
+                        </chart:NumericalAxis.LabelStyle>
+                        <chart:NumericalAxis.AxisLineStyle>
+                            <chart:ChartLineStyle StrokeWidth="0"/>
+                        </chart:NumericalAxis.AxisLineStyle>
+                        <chart:NumericalAxis.MajorTickStyle>
+                            <chart:ChartAxisTickStyle StrokeWidth="0"/>
+                        </chart:NumericalAxis.MajorTickStyle>
+                        <chart:NumericalAxis.MajorGridLineStyle>
+                            <chart:ChartLineStyle StrokeDashArray="{StaticResource gridLine}"/>
+                        </chart:NumericalAxis.MajorGridLineStyle>
+                    </chart:NumericalAxis>
+
+                </chart:SfCartesianChart.YAxes>
+
+                <chart:SfCartesianChart.TrackballBehavior>
+                    <local:TrackballExt x:Name="trackball">
+                        <local:TrackballExt.LabelStyle>
+                            <chart:ChartLabelStyle Background="Transparent"/>
+                        </local:TrackballExt.LabelStyle>
+                    </local:TrackballExt>
+                </chart:SfCartesianChart.TrackballBehavior>
+
+                <chart:SfCartesianChart.InteractiveBehavior>
+                    <local:InteractionExt/>
+                </chart:SfCartesianChart.InteractiveBehavior>
+
+                <chart:SfCartesianChart.Legend>
+                    <chart:ChartLegend Placement="Bottom"/>
+                </chart:SfCartesianChart.Legend>
+
+                <chart:StackingAreaSeries x:Name="series1" ItemsSource="{Binding ExportData}" Fill="#910A67" Stroke="#910A67"
+                               XBindingPath="Year" Label="Oceania" StrokeWidth="3"
+                               YBindingPath="Oceania" LegendIcon="SeriesType"/>
+
+                <chart:StackingAreaSeries x:Name="series2" ItemsSource="{Binding ExportData}" Fill="#D49B54" Stroke="#D49B54" 
+                   XBindingPath="Year"  Label="Eastern Europe" StrokeWidth="3"
+                   YBindingPath="EasternEurope" LegendIcon="SeriesType"/>
+
+                <chart:StackingAreaSeries x:Name="series3" ItemsSource="{Binding ExportData}" Fill="#EB3678" Stroke="#EB3678" 
+                   XBindingPath="Year"  Label="Africa" StrokeWidth="3"
+                   YBindingPath="Africa" LegendIcon="SeriesType"/>
+
+
+                <chart:StackingAreaSeries x:Name="series4" ItemsSource="{Binding ExportData}" Fill="#4E9F3D" Stroke="#4E9F3D"
+                   XBindingPath="Year"  Label="South America" StrokeWidth="3"
+                   YBindingPath="SouthAmerica" LegendIcon="SeriesType"/>
+
+                <chart:StackingAreaSeries x:Name="series5" ItemsSource="{Binding ExportData}" Fill="#107ee2" Stroke="#107ee2"
+                                      TrackballLabelTemplate="{StaticResource trackballLabelTemplate}" StrokeWidth="3"
+                   XBindingPath="Year" Label="North America" 
+                   YBindingPath="NorthAmerica" LegendIcon="SeriesType"/>
+
+                <chart:StackingAreaSeries x:Name="series6" ItemsSource="{Binding ExportData}" Fill="#ef5d3d" Stroke="#ef5d3d"
+                   XBindingPath="Year"   LegendIcon="SeriesType" StrokeWidth="3"
+                   YBindingPath="WesternEurope" Label="Western Europe"/>
+
+                <chart:StackingAreaSeries x:Name="series7" ItemsSource="{Binding ExportData}" Fill="#150485" Stroke="#150485"
+        XBindingPath="Year"   Label="Asia" LegendIcon="SeriesType" StrokeWidth="3"
+        YBindingPath="Asia" />
+
+            </chart:SfCartesianChart>
+
+            <Grid Grid.Row="0" Grid.Column="1" ColumnDefinitions="*, *" Margin="{OnPlatform iOS='0, 0, -70, 0'}" ColumnSpacing="10">
+
+
+                <Border HeightRequest="40" Grid.Column="1"
+       Margin="{OnPlatform MacCatalyst='0, 10, 5, 10', Default='0, 10, 5, 0'}"
+       HorizontalOptions="End"
+       VerticalOptions="Center"
+       Background="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20" />
+                    </Border.StrokeShape>
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                              Tapped="TapGestureRecognizer_Tapped_1" />
+                    </Border.GestureRecognizers>
+                    <Grid x:Name="myGrid"
+          ColumnDefinitions="35,*"
+          RowDefinitions="*">
+                        <Image Source="image.png" Margin="{OnPlatform Android=0, iOS=0, Default=5}" WidthRequest="{OnPlatform Android=15, iOS=15, Default=20}" HeightRequest="{OnPlatform Android=15, Default=20}">
+                        </Image>
+
+                        <Label Grid.Column="1"
+               Text="Download chart"  
+               HeightRequest="20" FontSize="{OnPlatform Android=8, iOS=8, MacCatalyst=12}"
+               Margin="{OnPlatform WinUI='2, 5, 10, 5', Android='-5, 0, 5, 0', iOS='-5, 0, 5, 0', MacCatalyst='0, 0, 5, 0'}"
+               HorizontalTextAlignment="Start"
+               VerticalTextAlignment="Center" />
+                    </Grid>
+                </Border>
+
+                <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Margin="{OnPlatform MacCatalyst='0, 10, 5, 10'}">
+                    <Label Text="Edit countries" VerticalOptions="Center" Margin="0, 5, 5, 0"/>
+                    <editors:SfComboBox x:Name="comboBox" Margin="0, 5, 0, 0" HorizontalOptions="FillAndExpand" MinimumWidthRequest="{OnPlatform Android=115, Default=120, MacCatalyst=140}"
+                                DisplayMemberPath = "Name" TextMemberPath="Name" Placeholder="Select" IsClearButtonVisible="False"
+                                ItemsSource="{Binding Countries}"  TextColor="Black" SelectionChanged="comboBox_SelectionChanged"/>
+                </HorizontalStackLayout>
+            </Grid>
+
+            <syncfusion:SfDataGrid x:Name="dataGrid" AutoGenerateColumnsMode="None" SelectionChanged="dataGrid_SelectionChanged"
+                           ItemsSource="{Binding ExportData}" FrozenRowCount="0" FrozenColumnCount="1"
+                       Grid.Row="1"    Grid.Column="1" Margin="{OnPlatform WinUI='5, 5, 5, 35', iOS='5, 5, -60, 5', Android=5}" SelectionMode="SingleDeselect"
+                                   GridLinesVisibility="Both"
+                            HeaderGridLinesVisibility="Both" QueryRowHeight="DataGrid_QueryRowHeight">
+                <syncfusion:SfDataGrid.DefaultStyle>
+                    <syncfusion:DataGridStyle RowBackground="#66C4D4FD" SelectionBackground="LightYellow" CurrentCellBorderColor="LightYellow" CurrentCellBorderWidth="0"  HeaderGridLineColor="Black" GridLineColor="Black"/>
+                </syncfusion:SfDataGrid.DefaultStyle>
+
+                <syncfusion:SfDataGrid.Resources>
+                    <Style TargetType="syncfusion:DataGridHeaderCell">
+                        <Setter Property="Background" Value="#C4D4FD"/>
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                    <Style TargetType="syncfusion:DataGridCell">
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                </syncfusion:SfDataGrid.Resources>
+
+
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:DataGridTextColumn MappingName="Year" HeaderText="Year" />
+                    <syncfusion:DataGridTextColumn MappingName="Oceania" HeaderText="Oceania" Format="0.00'%">
+                    </syncfusion:DataGridTextColumn>
+                    <syncfusion:DataGridTextColumn MappingName="EasternEurope" HeaderText="Eastern Europe" Format="0.00'%"/>
+                    <syncfusion:DataGridTextColumn MappingName="Africa" HeaderText="Africa" Format="0.00'%"/>
+                    <syncfusion:DataGridTextColumn MappingName="SouthAmerica" HeaderText="South America" Format="0.00'%"/>
+                    <syncfusion:DataGridTextColumn MappingName="NorthAmerica" HeaderText="North America" Format="0.00'%"/>
+                    <syncfusion:DataGridTextColumn MappingName="WesternEurope" HeaderText="Western Europe" Format="0.00'%"/>
+                    <syncfusion:DataGridTextColumn MappingName="Asia" HeaderText="Asia" Format="0.00'%"/>
+                    <syncfusion:DataGridTextColumn MappingName="Total" HeaderText="Total" Format="0.00'%" />
+
+                </syncfusion:SfDataGrid.Columns>
+
+
+            </syncfusion:SfDataGrid>
+        </Grid>
+    </Border>
+
+</ContentPage>
